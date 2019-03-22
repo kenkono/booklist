@@ -1,8 +1,11 @@
 from django.http import HttpResponse
+from django.shortcuts import render
+
+from .models import Book
 
 
 def index(request):
-    return HttpResponse("Index")
+    return render(request, 'book/index.html')
 
 
 def detail(request, book_id):
@@ -26,7 +29,7 @@ def mypage(request):
 
 
 def login(request):
-    return HttpResponse("login")
+    return render(request, 'book/login.html')
 
 
 def logout(request):
