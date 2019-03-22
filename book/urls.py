@@ -3,13 +3,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('list/', views.index, name='index'),
-    path('list/<int:book_id>/detail/', views.detail, name='detail'),
-    path('list/<int:book_id>/edit/', views.edit, name='edit'),
-    path('list/<int:book_id>/delete/', views.delete, name='delete'),
-    path('list/create/', views.create, name='create'),
-    path('list/mypage/', views.mypage, name='mypage'),
-    path('list/login/', views.login, name='login'),
-    path('list/logout/', views.logout, name='logout'),
-    path('list/signin/', views.signin, name='signin'),
+    path('books/', views.index, name='index'),
+    path('books/<int:book_id>/', views.detail, name='detail'),
+    path('books/<int:book_id>/edit/', views.edit, name='edit'),
+    path('books/<int:book_id>/delete/', views.delete, name='delete'),
+    path('books/new/', views.create, name='new'),
+    path('books/mypage/', views.mypage, name='mypage'),
+    path('books/signin/', views.signin, name='signin'),
 ]

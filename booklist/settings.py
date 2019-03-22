@@ -125,4 +125,4 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # redirect page after login
-LOGIN_REDIRECT_URL = '/list'
+LOGIN_REDIRECT_URL = '/books'
