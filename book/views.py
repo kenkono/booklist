@@ -26,15 +26,3 @@ def create(request):
 
 def mypage(request):
     return HttpResponse("mypage")
-
-
-def login(request):
-    return render(request, 'book/login.html')
-
-
-def logout(request):
-    return HttpResponse("logout")
-
-
-def signin(request):
-    return HttpResponse("siginin")

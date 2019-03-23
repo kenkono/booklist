@@ -9,5 +9,4 @@ urlpatterns = [
     path('books/<int:book_id>/delete/', views.delete, name='delete'),
     path('books/new/', views.create, name='new'),
     path('mypage/', views.mypage, name='mypage'),
-    path('accounts/signin/', views.signin, name='signin'),
 ]
