@@ -1,2 +1,12 @@
-<p>book list</p>
 <a href="{% url 'login' %}">login</a>
+
+{% if latest_book_list %}
+    <p>Book list</p>
+    <ul>
+    {% for book in latest_book_list %}
+        <li><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No book list.</p>
+{% endif %}

@@ -5,7 +5,9 @@ from .models import Book
 
 
 def index(request):
-    return render(request, 'book/index.html')
+    latest_book_list = Book.objects.order_by('updated_at')
+    context = {'latest_book_list': latest_book_list}
+    return render(request, 'book/index.html', context)
 
 
 def detail(request, book_id):
