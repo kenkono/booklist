@@ -1,7 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
 
 from .models import Book
+from .forms import BookForm
 
 
 def index(request):
@@ -22,8 +25,12 @@ def delete(request, book_id):
     return HttpResponse("delete %s" % book_id)
 
 
-def create(request):
-    return HttpResponse("create")
+class Create(CreateView):
+    model = Book
+    form_class = BookForm
+    template_name = "book/create.html"
+    success_url = reverse_lazy('book:index')
+
 
 
 def mypage(request):
