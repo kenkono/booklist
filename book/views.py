@@ -25,7 +25,7 @@ def delete(request, book_id):
     return HttpResponse("delete %s" % book_id)
 
 
-class Create(CreateView):
+class BookCreate(CreateView):
     model = Book
     form_class = BookForm
     template_name = "book/create.html"
