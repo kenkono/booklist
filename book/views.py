@@ -31,6 +31,10 @@ class BookCreate(CreateView):
     template_name = "book/create.html"
     success_url = reverse_lazy('book:index')
 
+    def get_success_url(self):
+        raise Exception
+        return reverse_lazy('book:index')
+
 
 def mypage(request):
     return HttpResponse("mypage")
