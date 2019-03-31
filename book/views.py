@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 
-from .models import Book
+from .models import Book, Impression
 from .forms import BookForm
 
 
@@ -13,16 +14,18 @@ def index(request):
     return render(request, 'book/index.html', context)
 
 
-def detail(request, book_id):
-    return HttpResponse("detail %s" % book_id)
+class BookDetail(DetailView):
+    model = Book, Impression
+    template_name = "book/detail.html"
 
 
 def edit(request, book_id):
     return HttpResponse("edit %s" % book_id)
 
 
-def delete(request, book_id):
-    return HttpResponse("delete %s" % book_id)
+class BookDelete(DetailView):
+    model = Book
+    success_url = reverse_lazy('book:index')
 
 
 class BookCreate(CreateView):
