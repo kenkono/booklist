@@ -23,7 +23,7 @@ def edit(request, book_id):
     return HttpResponse("edit %s" % book_id)
 
 
-class BookDelete(DetailView):
+class BookDelete(DeleteView):
     model = Book
     success_url = reverse_lazy('book:index')
 
