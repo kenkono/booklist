@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, DeleteView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 
@@ -19,8 +19,11 @@ class BookDetail(DetailView):
     template_name = "book/detail.html"
 
 
-def edit(request, book_id):
-    return HttpResponse("edit %s" % book_id)
+class BookEdit(UpdateView):
+    model = Book
+    form_class = BookForm
+    template_name = "book/edit.html"
+    success_url = reverse_lazy('book:index')
 
 
 class BookDelete(DeleteView):
