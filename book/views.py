@@ -1,17 +1,30 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.detail import DetailView
 from django.urls import reverse_lazy
 
 from .models import Book, Impression
-from .forms import BookForm
+from .forms import BookForm, ImageForm
 
 
 def index(request):
     latest_book_list = Book.objects.order_by('updated_at')
-    context = {'latest_book_list': latest_book_list}
-    return render(request, 'book/index.html', context)
+    context = {'latest_book_list': latest_book_list,
+               'form': ImageForm(),
+               }
+    if request.method == 'GET':
+        return render(request, 'book/index.html', context)
+    elif request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if not form.is_valid():
+            raise ValueError('invalid form')
+
+        impression = Impression()
+        impression.image = form.cleaned_data['image']
+        impression.save()
+
+        return redirect('/books/')
 
 
 class BookDetail(DetailView):

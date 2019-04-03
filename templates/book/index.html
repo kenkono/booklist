@@ -5,7 +5,16 @@
     <ul>
     {% for book in latest_book_list %}
         <li><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
+        <a href="/books/{{ book.id }}/">詳細</a>
+
         <a href="/books/{{ book.id }}/edit/">編集</a>
+
+        <form action="{% url 'book:index' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="投稿" />
+        </form>
+
         <form method="post" action="/books/{{ book.id }}/delete/">
         {% csrf_token %}
         <input type="submit" value="削除">
