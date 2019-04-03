@@ -5,6 +5,11 @@
     <ul>
     {% for book in latest_book_list %}
         <li><a href="/books/{{ book.id }}/">{{ book.title }}</a></li>
+        <a href="/books/{{ book.id }}/edit/">編集</a>
+        <form method="post" action="/books/{{ book.id }}/delete/">
+        {% csrf_token %}
+        <input type="submit" value="削除">
+        </form>
     {% endfor %}
     </ul>
 {% else %}
