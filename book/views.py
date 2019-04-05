@@ -16,7 +16,7 @@ def index(request):
     if request.method == 'GET':
         return render(request, 'book/index.html', context)
     elif request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
+        form = ImageForm(request.POST, request.FILES, initial={'book_id': request.book.id})
         if not form.is_valid():
             raise ValueError('invalid form')
 

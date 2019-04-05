@@ -13,3 +13,10 @@ class BookForm(forms.ModelForm):
 class ImageForm(forms.Form):
 
     image = forms.ImageField()
+
+    class Meta:
+        model = Impression
+        fields = (
+            'image',
+            'book_id',
+        )
