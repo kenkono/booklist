@@ -10,4 +10,5 @@ urlpatterns = [
     path('books/<pk>/delete/', views.BookDelete.as_view(), name='delete'),
     path('books/new/', views.BookCreate.as_view(), name='new'),
     path('mypage/', views.mypage, name='mypage'),
+    path('books/<pk>/image', views.index, name='image'),
 ]

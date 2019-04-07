@@ -9,7 +9,7 @@
 
         <a href="/books/{{ book.id }}/edit/">編集</a>
 
-        <form action="{% url 'book:index' %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'book:image' pk %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         <input type="submit" value="投稿" />

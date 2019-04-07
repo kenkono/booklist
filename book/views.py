@@ -8,7 +8,7 @@ from .models import Book, Impression
 from .forms import BookForm, ImageForm
 
 
-def index(request):
+def index(request, pk):
     latest_book_list = Book.objects.order_by('updated_at')
     context = {'latest_book_list': latest_book_list,
                'form': ImageForm(),
@@ -16,7 +16,7 @@ def index(request):
     if request.method == 'GET':
         return render(request, 'book/index.html', context)
     elif request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES, initial={'book_id': request.book.id})
+        form = ImageForm(request.POST, request.FILES, initial={'book_id': pk})
         if not form.is_valid():
             raise ValueError('invalid form')
 
@@ -57,3 +57,4 @@ class BookCreate(CreateView):
 
 def mypage(request):
     return HttpResponse("mypage")
+
