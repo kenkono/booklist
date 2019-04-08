@@ -50,7 +50,7 @@ def mypage(request):
 
 
 def image_save(request, pk):
-    form = ImageForm(request.POST, request.FILES, initial={'book_id': pk})
+    form = ImageForm(request.POST, request.FILES)
     if not form.is_valid():
         raise ValueError('invalid form')
 
