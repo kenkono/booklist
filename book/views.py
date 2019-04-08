@@ -8,23 +8,13 @@ from .models import Book, Impression
 from .forms import BookForm, ImageForm
 
 
-def index(request, pk):
+def index(request):
     latest_book_list = Book.objects.order_by('updated_at')
     context = {'latest_book_list': latest_book_list,
                'form': ImageForm(),
                }
-    if request.method == 'GET':
-        return render(request, 'book/index.html', context)
-    elif request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES, initial={'book_id': pk})
-        if not form.is_valid():
-            raise ValueError('invalid form')
 
-        impression = Impression()
-        impression.image = form.cleaned_data['image']
-        impression.save()
-
-        return redirect('/books/')
+    return render(request, 'book/index.html', context)
 
 
 class BookDetail(DetailView):
@@ -57,4 +47,17 @@ class BookCreate(CreateView):
 
 def mypage(request):
     return HttpResponse("mypage")
+
+
+def image_save(request, pk):
+    form = ImageForm(request.POST, request.FILES, initial={'book_id': pk})
+    if not form.is_valid():
+        raise ValueError('invalid form')
+
+    impression = Impression()
+    impression.image = form.cleaned_data['image']
+    impression.book_id = pk
+    impression.save()
+
+    return redirect('/books/')
 

@@ -11,7 +11,7 @@ class Book(models.Model):
 
 
 class Impression(models.Model):
-    book_id = models.ForeignKey(Book, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
     impression = models.CharField(max_length=255)
     image = models.ImageField(upload_to='pictures', blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
