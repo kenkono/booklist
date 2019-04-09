@@ -18,8 +18,16 @@ def index(request):
 
 
 class BookDetail(DetailView):
-    model = Book, Impression
     template_name = "book/detail.html"
+
+    # def get_queryset(self):
+    #     return Book.objects.all()
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['book'] = Book.objects.filter(pk=self.kwargs.get('pk'))
+        context['impression'] = Impression.objects.filter(pk=self.kwargs.get('pk'))
+        return context
 
 
 class BookEdit(UpdateView):
